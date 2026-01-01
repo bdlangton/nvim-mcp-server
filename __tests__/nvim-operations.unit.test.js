@@ -437,4 +437,87 @@ describe('nvim-operations unit tests with mocks', () => {
       expect(Array.isArray(result.buffers)).toBe(true);
     });
   });
+
+  describe('openFile with mocks', () => {
+    it('should throw error when no nvim instance found', async () => {
+      fs.readdir.mockResolvedValue([]);
+
+      const { openFile } = await import('../lib/nvim-operations.js');
+
+      await expect(
+        openFile('/path/to/file.txt')
+      ).rejects.toThrow('No Neovim instance found in current directory');
+    });
+
+    it('should open file with absolute path', async () => {
+      const mockNvim = {
+        call: vi.fn().mockResolvedValue(process.cwd()),
+        command: vi.fn().mockResolvedValue(undefined),
+      };
+
+      neovim.attach.mockReturnValue(mockNvim);
+
+      const mockEntries = [
+        { name: 'nvim.12345', isDirectory: () => true },
+      ];
+
+      fs.readdir.mockResolvedValue(mockEntries);
+      fs.access.mockResolvedValue(undefined);
+
+      const { openFile } = await import('../lib/nvim-operations.js');
+      const result = await openFile('/absolute/path/to/file.txt');
+
+      expect(result).toEqual({
+        success: true,
+        path: '/absolute/path/to/file.txt',
+      });
+      expect(mockNvim.command).toHaveBeenCalledWith('edit /absolute/path/to/file.txt');
+    });
+
+    it('should open file with relative path', async () => {
+      const mockNvim = {
+        call: vi.fn().mockResolvedValue(process.cwd()),
+        command: vi.fn().mockResolvedValue(undefined),
+      };
+
+      neovim.attach.mockReturnValue(mockNvim);
+
+      const mockEntries = [
+        { name: 'nvim.12345', isDirectory: () => true },
+      ];
+
+      fs.readdir.mockResolvedValue(mockEntries);
+      fs.access.mockResolvedValue(undefined);
+
+      const { openFile } = await import('../lib/nvim-operations.js');
+      const result = await openFile('relative/path/file.txt');
+
+      expect(result).toHaveProperty('success', true);
+      expect(result).toHaveProperty('path');
+      expect(result.path).toContain('relative/path/file.txt');
+      expect(mockNvim.command).toHaveBeenCalled();
+    });
+
+    it('should handle errors when opening file', async () => {
+      const mockNvim = {
+        call: vi.fn().mockResolvedValue(process.cwd()),
+        command: vi.fn().mockRejectedValue(new Error('Cannot open file')),
+      };
+
+      neovim.attach.mockReturnValue(mockNvim);
+
+      const mockEntries = [
+        { name: 'nvim.12345', isDirectory: () => true },
+      ];
+
+      fs.readdir.mockResolvedValue(mockEntries);
+      fs.access.mockResolvedValue(undefined);
+
+      const { openFile } = await import('../lib/nvim-operations.js');
+
+      await expect(
+        openFile('/path/to/file.txt')
+      ).rejects.toThrow('Failed to open file');
+    });
+  });
 });

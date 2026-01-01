@@ -15,6 +15,7 @@ import {
   updateBuffer,
   reloadBuffer,
   reloadAllBuffers,
+  openFile,
 } from "./lib/nvim-operations.js";
 
 /**
@@ -184,6 +185,22 @@ async function main() {
             properties: {},
           },
         },
+        {
+          name: "open_file",
+          description:
+            "Open a file in Neovim. Use this to open newly created files or existing files for editing.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              path: {
+                type: "string",
+                description:
+                  "The file path to open (can be absolute or relative to current directory)",
+              },
+            },
+            required: ["path"],
+          },
+        },
       ],
     };
   });
@@ -273,6 +290,18 @@ async function main() {
             {
               type: "text",
               text: result.message,
+            },
+          ],
+        };
+      }
+
+      if (name === "open_file") {
+        const result = await openFile(args.path);
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Successfully opened file in Neovim: ${result.path}`,
             },
           ],
         };

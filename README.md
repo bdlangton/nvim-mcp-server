@@ -13,6 +13,9 @@ MCP (Model Context Protocol) server that integrates Neovim buffers with Claude C
 - **`get_current_buffer()`** - Get the currently active buffer
 - **`get_buffer_content(path)`** - Get content of a specific buffer by path
 - **`update_buffer(path, content)`** - Update buffer content directly in nvim (changes appear immediately!)
+- **`open_file(path)`** - Open a file in nvim (useful after creating new files)
+- **`reload_buffer(path)`** - Reload a buffer from disk
+- **`reload_all_buffers()`** - Check and reload all buffers that changed on disk
 
 ## Setup with Claude Code
 
@@ -93,6 +96,17 @@ Claude:
 - Adds error handling
 - Calls update_buffer() to apply changes
 - You see updates in nvim immediately
+```
+
+#### 4. Create and Open New File
+```
+You: "Create a new component called Button.jsx"
+
+Claude:
+- Creates the file using Write tool
+- Calls open_file("src/components/Button.jsx")
+- File opens in your nvim automatically
+- You can continue editing right away!
 ```
 
 ## How It Works
