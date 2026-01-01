@@ -1,7 +1,7 @@
 {
   "name": "nvim-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for Neovim buffer integration with Claude Code",
+  "description": "MCP server for exposing Neovim buffers to AI agents like Claude Code",
   "type": "module",
   "main": "index.js",
   "bin": {
@@ -21,8 +21,16 @@
     "claude",
     "buffer"
   ],
-  "author": "",
+  "author": "Lakshan Perera <lakshan@laktek.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laktek/nvim-mcp-server.git"
+  },
+  "files": [
+    "index.js",
+    "lib/"
+  ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "neovim": "^5.1.0"

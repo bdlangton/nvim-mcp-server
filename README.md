@@ -16,16 +16,7 @@ MCP (Model Context Protocol) server that integrates Neovim buffers with Claude C
 
 ## Installation
 
-1. **Install dependencies:**
-   ```bash
-   cd nvim-mcp-server
-   npm install
-   ```
-
-2. **Make the server executable:**
-   ```bash
-   chmod +x index.js
-   ```
+No installation required! Use `npx` to run the server directly.
 
 ## Setup with Claude Code
 
@@ -37,15 +28,12 @@ Add this MCP server to your Claude Code configuration:
 {
   "mcpServers": {
     "nvim": {
-      "command": "node",
-      "args": ["/Users/lakshan/workspace/vim-claude/nvim-mcp-server/index.js"],
-      "cwd": "."
+      "command": "npx",
+      "args": ["nvim-mcp-server"]
     }
   }
 }
 ```
-
-**Important:** Update the path to match where you installed the server.
 
 ## Usage
 
