@@ -177,6 +177,56 @@ The server communicates via stdio, so you'll need an MCP client (like Claude Cod
 ### Debug mode:
 The server logs errors to stderr, which you can see in Claude Code's MCP server logs.
 
+### Running tests:
+```bash
+npm test              # Run all tests
+npm run test:watch    # Watch mode
+npm run test:ui       # Interactive UI
+npm run test:coverage # With coverage report
+```
+
+## Publishing
+
+The project includes automated release scripts for publishing to npm.
+
+### Prerequisites:
+- Clean git working directory
+- Tests must pass
+- npm authentication configured (`npm login`)
+
+### Release commands:
+
+**Patch release** (1.0.0 → 1.0.1):
+```bash
+npm run release:patch
+```
+
+**Minor release** (1.0.0 → 1.1.0):
+```bash
+npm run release:minor
+```
+
+**Major release** (1.0.0 → 2.0.0):
+```bash
+npm run release:major
+```
+
+**Specific version**:
+```bash
+npm run release 1.2.3
+```
+
+### What the release script does:
+1. Validates git working directory is clean
+2. Runs all tests
+3. Bumps version in package.json
+4. Creates git commit with version bump
+5. Creates git tag (e.g., v1.0.1)
+6. Publishes to npm
+7. Pushes commit and tags to git
+
+If any step fails, the script will abort and rollback changes.
+
 ## Requirements
 
 - Node.js 16+
