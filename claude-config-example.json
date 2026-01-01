@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "nvim": {
+      "command": "node",
+      "args": ["/Users/lakshan/workspace/vim-claude/nvim-mcp-server/index.js"],
+      "cwd": "."
+    }
+  }
+}
