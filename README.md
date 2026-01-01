@@ -14,15 +14,21 @@ MCP (Model Context Protocol) server that integrates Neovim buffers with Claude C
 - **`get_buffer_content(path)`** - Get content of a specific buffer by path
 - **`update_buffer(path, content)`** - Update buffer content directly in nvim (changes appear immediately!)
 
-## Installation
-
-No installation required! Use `npx` to run the server directly.
-
 ## Setup with Claude Code
 
-Add this MCP server to your Claude Code configuration:
+### Option 1: Using the CLI (Recommended)
 
-**File:** `~/.claude/claude_desktop_config.json` (or your Claude Code config file)
+Run the following command in your terminal:
+
+```bash
+claude mcp add --transport stdio nvim -- npx nvim-mcp-server
+```
+
+This will automatically add the server to your `~/.claude.json` configuration.
+
+### Option 2: Manual Configuration
+
+Alternatively, manually edit `~/.claude.json`:
 
 ```json
 {
@@ -34,6 +40,18 @@ Add this MCP server to your Claude Code configuration:
   }
 }
 ```
+
+After adding the configuration, restart Claude Code for changes to take effect.
+
+### Verify Setup
+
+Check that the server is configured correctly:
+
+```bash
+claude mcp list
+```
+
+Or use `/mcp` within Claude Code to check server status.
 
 ## Usage
 
