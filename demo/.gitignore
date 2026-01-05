@@ -1,0 +1,31 @@
+# Node modules (if npm install is run)
+node_modules/
+
+# Test artifacts
+*.test.js
+*.spec.js
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+npm-debug.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Files created during demo
+src/validator.js
+src/*.test.js

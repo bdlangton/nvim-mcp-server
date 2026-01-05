@@ -1,0 +1,10 @@
+{
+  "name": "nvim-mcp-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Demo project for nvim MCP server screencast",
+  "main": "src/calculator.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  }
+}
