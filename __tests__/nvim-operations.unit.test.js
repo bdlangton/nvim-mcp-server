@@ -270,11 +270,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { getBufferContent } = await import('../lib/nvim-operations.js');
@@ -309,11 +309,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { updateBuffer } = await import('../lib/nvim-operations.js');
@@ -355,11 +355,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { reloadBuffer } = await import('../lib/nvim-operations.js');
@@ -387,7 +387,7 @@ describe('nvim-operations unit tests with mocks', () => {
 
       const mockNvim = {
         call: vi.fn()
-          .mockResolvedValueOnce(process.cwd())
+          .mockResolvedValueOnce(process.cwd()) // getcwd
           .mockResolvedValueOnce(1) // buflisted for buf1
           .mockResolvedValueOnce(1), // buflisted for buf2
         command: vi.fn().mockResolvedValue(undefined),
@@ -396,11 +396,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { reloadAllBuffers } = await import('../lib/nvim-operations.js');
@@ -457,11 +457,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { openFile } = await import('../lib/nvim-operations.js');
@@ -482,11 +482,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { openFile } = await import('../lib/nvim-operations.js');
@@ -506,11 +506,11 @@ describe('nvim-operations unit tests with mocks', () => {
 
       neovim.attach.mockReturnValue(mockNvim);
 
-      const mockEntries = [
-        { name: 'nvim.12345', isDirectory: () => true },
-      ];
-
-      fs.readdir.mockResolvedValue(mockEntries);
+      // Mock the readdir calls for the nested structure
+      fs.readdir
+        .mockResolvedValueOnce([{ name: 'nvim.12345', isDirectory: () => true }]) // First call: tmpdir entries
+        .mockResolvedValueOnce([{ name: '0', isDirectory: () => true }]) // Second call: subdirectories in nvim.12345
+        .mockResolvedValueOnce(['nvim.99999.0']); // Third call: socket files in subdirectory
       fs.access.mockResolvedValue(undefined);
 
       const { openFile } = await import('../lib/nvim-operations.js');
